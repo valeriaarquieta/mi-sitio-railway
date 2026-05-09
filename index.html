@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -55,6 +55,110 @@
   </style>
   <link rel="icon" href="logo.jpg">
 </head>
+<body> -->
+  <!-- <div class="container"> -->
+    <!-- Header -->
+    <!-- <header class="header">
+      <img src="logo.jpg" alt="Logo del sitio" class="logo">
+    </header> -->
+
+    <!-- Body -->
+    <!-- <main class="main">
+      <a href="https://www.netflix.com/watch/80057281" target="_blank">
+        Ver video en streaming
+      </a>
+    </main> -->
+
+    <!-- Footer -->
+    <!-- <footer class="footer">
+      <p>Curso: Conceptualización de servicios en la nube</p>
+      <p>Nombre: Valeria Arquieta Gonzalez</p>
+      <p>Código: 224065146</p>
+      <p>Correo: valeria.arquietag@gmail.com</p>
+    </footer>
+  </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mi Sitio en Railway</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9uZG8lMjBkZSUyMHBhbnRhbGxhJTIwZmxvcmFsfGVufDB8fDB8fHww') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px;
+      color: white;
+    }
+
+    .formulario {
+      margin-bottom: 20px;
+      background-color: rgba(0,0,0,0.6);
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    input {
+      margin: 5px;
+      padding: 8px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer {
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+  <link rel="icon" href="logo.jpg">
+</head>
 <body>
   <div class="container">
     <!-- Header -->
@@ -64,9 +168,18 @@
 
     <!-- Body -->
     <main class="main">
-      <a href="https://www.netflix.com/watch/80057281" target="_blank">
-        Ver video en streaming
-      </a>
+      <h1>Gestión de Registros</h1>
+
+      <!-- Formulario para agregar -->
+      <div class="formulario">
+        <input id="nombre" placeholder="Nombre">
+        <input id="edad" type="number" placeholder="Edad">
+        <button onclick="agregarRegistro()">Agregar</button>
+      </div>
+
+      <!-- Lista de registros -->
+      <h2>Lista de registros</h2>
+      <ul id="lista"></ul>
     </main>
 
     <!-- Footer -->
@@ -77,5 +190,52 @@
       <p>Correo: valeria.arquietag@gmail.com</p>
     </footer>
   </div>
+
+  <script>
+    const API_URL = "https://tu-api.up.railway.app/registros"; // cambia por tu backend
+
+    async function cargarRegistros() {
+      const res = await fetch(API_URL);
+      const data = await res.json();
+      document.getElementById('lista').innerHTML = data.map(r => `
+        <li>
+          ${r.nombre} (${r.edad})
+          <button onclick="editarRegistro(${r.id})">Editar</button>
+          <button onclick="eliminarRegistro(${r.id})">Eliminar</button>
+        </li>
+      `).join('');
+    }
+
+    async function agregarRegistro() {
+      const nombre = document.getElementById('nombre').value;
+      const edad = document.getElementById('edad').value;
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, edad })
+      });
+      cargarRegistros();
+    }
+
+    async function editarRegistro(id) {
+      const nuevoNombre = prompt("Nuevo nombre:");
+      const nuevaEdad = prompt("Nueva edad:");
+      await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre: nuevoNombre, edad: nuevaEdad })
+      });
+      cargarRegistros();
+    }
+
+    async function eliminarRegistro(id) {
+      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      cargarRegistros();
+    }
+
+    // Cargar registros al inicio
+    cargarRegistros();
+  </script>
 </body>
 </html>
+
