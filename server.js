@@ -16,7 +16,9 @@ const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const port = process.env.PORT || 3000;
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, 'site')));
 app.use(express.json());
 
 // Conexión a SQLite
