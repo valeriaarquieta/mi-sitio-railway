@@ -1,97 +1,15 @@
-<!-- <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Mi Sitio en Railway</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9uZG8lMjBkZSUyMHBhbnRhbGxhJTIwZmxvcmFsfGVufDB8fDB8fHww') no-repeat center center fixed;
-      background-size: cover;
-    }
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    .header {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px;
-    }
-
-    .logo {
-      height: 50px;
-    }
-
-    .main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .main a {
-      font-size: 1.2rem;
-      color: white;
-      text-decoration: none;
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-
-    .main a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .footer {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      text-align: center;
-      padding: 15px;
-    }
-  </style>
-  <link rel="icon" href="logo.jpg">
-</head>
-<body> -->
-  <!-- <div class="container"> -->
-    <!-- Header -->
-    <!-- <header class="header">
-      <img src="logo.jpg" alt="Logo del sitio" class="logo">
-    </header> -->
-
-    <!-- Body -->
-    <!-- <main class="main">
-      <a href="https://www.netflix.com/watch/80057281" target="_blank">
-        Ver video en streaming
-      </a>
-    </main> -->
-
-    <!-- Footer -->
-    <!-- <footer class="footer">
-      <p>Curso: Conceptualización de servicios en la nube</p>
-      <p>Nombre: Valeria Arquieta Gonzalez</p>
-      <p>Código: 224065146</p>
-      <p>Correo: valeria.arquietag@gmail.com</p>
-    </footer>
-  </div>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Mi Sitio en Railway</title>
+  <title>Gestión de Tareas</title>
+  <link rel="icon" href="logo.jpg">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: url('https://images.unsplash.com/photo-1532211387405-12202cb81d7b?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Zm9uZG8lMjBkZSUyMHBhbnRhbGxhJTIwZmxvcmFsfGVufDB8fDB8fHww') no-repeat center center fixed;
-      background-size: cover;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: #333;
     }
 
     .container {
@@ -101,8 +19,10 @@
     }
 
     .header {
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 15px;
+      text-align: center;
     }
 
     .logo {
@@ -111,38 +31,37 @@
 
     .main {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
       padding: 20px;
-      color: white;
     }
 
     .formulario {
       margin-bottom: 20px;
-      background-color: rgba(0,0,0,0.6);
-      padding: 15px;
-      border-radius: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 1rem;
     }
 
     input {
-      margin: 5px;
-      padding: 8px;
+      flex: 1;
+      min-width: 150px;
     }
 
     button {
-      margin: 5px;
-      padding: 8px 12px;
+      background: #0077b6;
+      color: white;
       border: none;
       border-radius: 5px;
-      background-color: rgba(0,0,0,0.7);
-      color: white;
       cursor: pointer;
+      padding: 10px 15px;
     }
 
     button:hover {
-      background-color: rgba(255,255,255,0.2);
+      background: #023e8a;
     }
 
     ul {
@@ -150,92 +69,118 @@
       padding: 0;
     }
 
+    .enlaces a {
+      display: inline-block;
+      margin: 5px;
+      color: #0077b6;
+      text-decoration: none;
+    }
+
+    .enlaces a:hover {
+      text-decoration: underline;
+    }
+
     .footer {
-      background-color: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.7);
       color: white;
       text-align: center;
-      padding: 15px;
+      padding: 10px;
+    }
+
+    /* 📱 Vista móvil */
+    @media (max-width: 600px) {
+      .formulario {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      input {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
-  <link rel="icon" href="logo.jpg">
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
     <header class="header">
-      <img src="logo.jpg" alt="Logo del sitio" class="logo">
+      <img src="logo.jpg" alt="Logo" class="logo">
+      <h1>Gestión de Tareas</h1>
     </header>
 
-    <!-- Body -->
     <main class="main">
-      <h1>Gestión de Registros</h1>
-
-      <!-- Formulario para agregar -->
+      <!-- Formulario -->
       <div class="formulario">
-        <input id="nombre" placeholder="Nombre">
-        <input id="edad" type="number" placeholder="Edad">
-        <button onclick="agregarRegistro()">Agregar</button>
+        <input id="nombre" placeholder="Nombre de la tarea">
+        <input id="descripcion" placeholder="Descripción">
+        <button onclick="agregarTarea()">Agregar</button>
       </div>
 
-      <!-- Lista de registros -->
-      <h2>Lista de registros</h2>
+      <!-- Lista -->
+      <h2>Lista de tareas</h2>
       <ul id="lista"></ul>
+
+      <!-- Enlaces externos -->
+      <div class="enlaces">
+        <h3>Recursos en la nube</h3>
+        <a href="https://drive.google.com" target="_blank">Google Drive</a>
+        <a href="https://www.dropbox.com" target="_blank">Dropbox</a>
+        <a href="https://www.youtube.com" target="_blank">YouTube</a>
+      </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
       <p>Curso: Conceptualización de servicios en la nube</p>
       <p>Nombre: Valeria Arquieta Gonzalez</p>
-      <p>Código: 224065146</p>
-      <p>Correo: valeria.arquietag@gmail.com</p>
     </footer>
   </div>
 
   <script>
-    const API_URL = "/registros"; // cambia por tu backend
+    const API_URL = "/tareas";
 
-    async function cargarRegistros() {
+    async function cargarTareas() {
       const res = await fetch(API_URL);
       const data = await res.json();
-      document.getElementById('lista').innerHTML = data.map(r => `
+      document.getElementById('lista').innerHTML = data.map(t => `
         <li>
-          ${r.nombre} (${r.edad})
-          <button onclick="editarRegistro(${r.id})">Editar</button>
-          <button onclick="eliminarRegistro(${r.id})">Eliminar</button>
+          <strong>${t.nombre}</strong>: ${t.descripcion}
+          <button onclick="editarTarea(${t.id})">Editar</button>
+          <button onclick="eliminarTarea(${t.id})">Eliminar</button>
         </li>
       `).join('');
     }
 
-    async function agregarRegistro() {
+    async function agregarTarea() {
       const nombre = document.getElementById('nombre').value;
-      const edad = document.getElementById('edad').value;
+      const descripcion = document.getElementById('descripcion').value;
       await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre, edad })
+        body: JSON.stringify({ nombre, descripcion })
       });
-      cargarRegistros();
+      cargarTareas();
     }
 
-    async function editarRegistro(id) {
+    async function editarTarea(id) {
       const nuevoNombre = prompt("Nuevo nombre:");
-      const nuevaEdad = prompt("Nueva edad:");
+      const nuevaDescripcion = prompt("Nueva descripción:");
       await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nombre: nuevoNombre, edad: nuevaEdad })
+        body: JSON.stringify({ nombre: nuevoNombre, descripcion: nuevaDescripcion })
       });
-      cargarRegistros();
+      cargarTareas();
     }
 
-    async function eliminarRegistro(id) {
+    async function eliminarTarea(id) {
       await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-      cargarRegistros();
+      cargarTareas();
     }
 
-    // Cargar registros al inicio
-    cargarRegistros();
+    cargarTareas();
   </script>
 </body>
 </html>
-

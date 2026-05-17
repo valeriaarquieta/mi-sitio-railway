@@ -1,69 +1,55 @@
-// const express = require('express');
-// const path = require('path');
-
-// const app = express();
-
-
-// app.use(express.static(__dirname));
-
-// const PORT = process.env.PORT || 3000;
-
-// app.listen(PORT, () => {
-//   console.log('Servidor corriendo en ' + PORT);
-// });
-
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const path = require('path');
+
 const app = express();
 const port = process.env.PORT || 3000;
-const path = require('path');
 
 app.use(express.static(path.join(__dirname, 'site')));
 app.use(express.json());
 
-// Conexión a SQLite
 const db = new sqlite3.Database('./database.db');
 
-// Crear tabla si no existe
-db.run("CREATE TABLE IF NOT EXISTS registros (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, edad INTEGER)");
+// Crear tabla
+db.run("CREATE TABLE IF NOT EXISTS tareas (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, descripcion TEXT)");
 
-// Consultar todos
-app.get('/registros', (req, res) => {
-  db.all("SELECT * FROM registros", [], (err, rows) => {
+// Consultar todas
+app.get('/tareas', (req, res) => {
+  db.all("SELECT * FROM tareas", [], (err, rows) => {
     if (err) return res.status(500).send(err);
     res.json(rows);
   });
 });
 
-// Consultar uno
-app.get('/registros/:id', (req, res) => {
-  db.get("SELECT * FROM registros WHERE id = ?", [req.params.id], (err, row) => {
+// Consultar una
+app.get('/tareas/:id', (req, res) => {
+  db.get("SELECT * FROM tareas WHERE id = ?", [req.params.id], (err, row) => {
     if (err) return res.status(500).send(err);
     res.json(row);
   });
 });
 
 // Agregar
-app.post('/registros', (req, res) => {
-  const { nombre, edad } = req.body;
-  db.run("INSERT INTO registros (nombre, edad) VALUES (?, ?)", [nombre, edad], function(err) {
+app.post('/tareas', (req, res) => {
+  const { nombre, descripcion } = req.body;
+  db.run("INSERT INTO tareas (nombre, descripcion) VALUES (?, ?)", [nombre, descripcion], function(err) {
     if (err) return res.status(500).send(err);
-    res.json({ id: this.lastID, nombre, edad });
+    res.json({ id: this.lastID, nombre, descripcion });
   });
 });
 
 // Editar
-app.put('/registros/:id', (req, res) => {
-  const { nombre, edad } = req.body;
-  db.run("UPDATE registros SET nombre = ?, edad = ? WHERE id = ?", [nombre, edad, req.params.id], function(err) {
+app.put('/tareas/:id', (req, res) => {
+  const { nombre, descripcion } = req.body;
+  db.run("UPDATE tareas SET nombre = ?, descripcion = ? WHERE id = ?", [nombre, descripcion, req.params.id], function(err) {
     if (err) return res.status(500).send(err);
     res.json({ changes: this.changes });
   });
 });
 
 // Eliminar
-app.delete('/registros/:id', (req, res) => {
-  db.run("DELETE FROM registros WHERE id = ?", [req.params.id], function(err) {
+app.delete('/tareas/:id', (req, res) => {
+  db.run("DELETE FROM tareas WHERE id = ?", [req.params.id], function(err) {
     if (err) return res.status(500).send(err);
     res.json({ changes: this.changes });
   });
